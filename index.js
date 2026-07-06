@@ -1,5 +1,6 @@
 const express=require('express');
 const line=require('@line/bot-sdk');
+const fs = require('fs');
 const settings=require('./settings');
 const userSvc=require('./user');
 const flex=require('./flex');
@@ -29,6 +30,17 @@ async function handleEvent(event,req){
   const name=await getName(userId);
   const u=userSvc.get(userId,name);
   if(mod.muted(userId)) return null;
+  if(body==='公告'){
+  let data={announcement:'目前沒有公告'};
+  try{ data=JSON.parse(fs.readFileSync('./settings.json','utf8')); }catch(e){}
+  return reply(event.replyToken, text('📢 公告\n\n'+(data.announcement||'目前沒有公告')));
+}
+
+if(body==='群規'){
+  let data={rules:'目前沒有群規'};
+  try{ data=JSON.parse(fs.readFileSync('./settings.json','utf8')); }catch(e){}
+  return reply(event.replyToken, text('📜 群規\n\n'+(data.rules||'目前沒有群規')));
+}
   const msg=event.message;
   const body=(msg.text||'').trim();
   const s=settings.get();
