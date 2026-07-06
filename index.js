@@ -1,11 +1,11 @@
 const express=require('express');
 const line=require('@line/bot-sdk');
-const settings=require('./services/settings');
-const userSvc=require('./services/user');
-const flex=require('./services/flex');
-const shop=require('./services/shop');
-const mod=require('./services/moderation');
-const {getLevel,getTitle}=require('./services/level');
+const settings=require('./settings');
+const userSvc=require('./user');
+const flex=require('./flex');
+const shop=require('./shop');
+const mod=require('./moderation');
+const {getLevel,getTitle}=require('./level');
 
 const config={channelAccessToken:process.env.CHANNEL_ACCESS_TOKEN||process.env.LINE_CHANNEL_ACCESS_TOKEN,channelSecret:process.env.CHANNEL_SECRET||process.env.LINE_CHANNEL_SECRET};
 const client=new line.Client(config);
