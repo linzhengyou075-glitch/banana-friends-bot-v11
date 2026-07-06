@@ -13,6 +13,8 @@ const app=express();
 app.set('view engine','ejs');
 app.set('views',__dirname+'/views');
 app.use(express.static(__dirname+'/public'));
+const admin = require('./admin');
+app.use('/admin', admin);
 app.use('/admin', require('./routes/admin'));
 app.get('/',(req,res)=>res.send('🍌 Banana Friends Bot V11 is running. Admin: /admin'));
 
