@@ -51,8 +51,6 @@ if(body==='群規'){
     if(!mod.isSpam(userId,body) && !body.startsWith('/')){ u.chatCount++; userSvc.update(userId,u); userSvc.addExp(userId,name,Number(s.chatExp||2)); }
 
     if(['指令','幫助','教學'].includes(body)) return reply(event.replyToken,text('🍌〔蕉〕個朋友吧！指令\n\n👤 個人：簽到、我的資料、名片、我的背包\n🏆 排行：排行榜、聊天排行、香蕉幣排行\n🎁 商店：商店、購買 商品名稱\n🎮 Pokemon GO：Pokemon GO、兌換碼、社群日、團體戰\n📜 群組：群規、公告\n👑 管理員：/公告 內容、/黑名單 UserID、/解除黑名單 UserID'));
-    if(body==='群規') return reply(event.replyToken,text(s.groupRules));
-    if(body==='公告') return reply(event.replyToken,text('📢 公告\n'+s.announcement));
     if(body==='我的ID') return reply(event.replyToken,text(`你的ID：\n${userId}`));
     if(body==='我的資料'||body==='名片') return reply(event.replyToken, flex.profile(u, baseUrl(req)));
     if(body.startsWith('修改名片 ')){ const cardText=body.replace('修改名片 ','').slice(0,300); userSvc.update(userId,{...u,cardText}); return reply(event.replyToken,text('✅ 名片自介已更新')); }
